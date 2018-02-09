@@ -9,7 +9,7 @@ const Project = db.define('project', {
       notEmpty: true,
     }
   },
-  startingWordCount: {
+  startingWordcount: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   }
