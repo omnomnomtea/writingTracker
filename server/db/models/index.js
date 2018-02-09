@@ -1,6 +1,6 @@
 const User = require('./user')
-const Project = requre('./project')
-const WordcountEntry = requre('./wordcountEntry')
+const Project = require('./project')
+const WordcountEntry = require('./wordcountEntry')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
