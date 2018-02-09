@@ -50,7 +50,7 @@ router.get('/:id/entries', (req, res, next) => {
     include: [WordcountEntry],
   })
     .then((project) => {
-      if (project) return res.json(project.entries);
+      if (project) return res.json(project.wordcountEntries);
       else res.send(404);
     })
     .catch(next);
