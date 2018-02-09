@@ -6,7 +6,7 @@ const WordcountEntry = db.define('wordcountEntry', {
     type: Sequelize.DATE,
     allowNull: false,
   },
-  wordCount: {
+  wordcount: {
     type: Sequelize.INTEGER,
     allowNull: false,
   }
