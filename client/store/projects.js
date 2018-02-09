@@ -6,22 +6,22 @@ const GET_ALL_PROJECTS = "GET_ALL_PROJECTS";
 
 // Action Creators
 export const getProject = (project) => ({ type: GET_PROJECT, project: project })
-export const getAllProjects = (projects) => ({ type: GET_ALL_PROJECTS, project: projects })
+export const getAllProjects = (projects) => ({ type: GET_ALL_PROJECTS, projects: projects })
 
 // Thunk Creators
 export const fetchProject = (id) =>
   dispatch =>
     axios.get(`/api/projects/${id}`)
-      .then(project => {
-        dispatch(getProject(project))
+      .then(res => {
+        dispatch(getProject(res.data))
       })
       .catch(err => console.log(err))
 
 export const fetchAllProjects = () =>
   dispatch =>
     axios.get(`/api/projects/`)
-      .then(projects => {
-        dispatch(getAllProjects(projects))
+      .then(res => {
+        dispatch(getAllProjects(res.data))
       })
       .catch(err => console.log(err))
 
