@@ -9,7 +9,7 @@ export const getProject = (project) => ({ type: GET_PROJECT, project: project })
 export const getAllProjects = (projects) => ({ type: GET_ALL_PROJECTS, project: projects })
 
 // Thunk Creators
-export const projectGetter = (id) =>
+export const fetchProject = (id) =>
   dispatch =>
     axios.get(`/api/projects/${id}`)
       .then(project => {
@@ -17,7 +17,7 @@ export const projectGetter = (id) =>
       })
       .catch(err => console.log(err))
 
-export const allProjectsGetter = () =>
+export const fetchAllProjects = () =>
   dispatch =>
     axios.get(`/api/projects/`)
       .then(projects => {
