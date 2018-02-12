@@ -1,18 +1,20 @@
 import React from 'react'
-import {withRouter, Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {fetchProject} from '../store'
+import { withRouter, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchProject } from '../store'
 
 class SingleProject extends React.Component {
   componentDidMount() {
     this.props.fetchProject(this.props.id)
   }
 
-  render () {
+  render() {
     return (
       <div>
-        Title: {this.props.project.name}
-        Wordcount: {this.props.project.wordcount}
+        <ul>
+          <li>Title: {this.props.project.name}</li>
+          <li>Wordcount: {this.props.project.wordcount}</li>
+        </ul>
       </div>
     )
   }
