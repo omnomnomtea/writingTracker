@@ -12,17 +12,18 @@ const Project = db.define('project', {
   startingWordcount: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
-  }
+  },
 })
 
 module.exports = Project;
 
 Project.prototype.getWordcount = function () {
-  return this.getEntries()
+  return wordcount = this.getWordcountEntries()
     .then(entries => {
-      return entries.reduce((acc, entry) => {
+      const wordcount = entries.reduce((acc, entry) => {
         return acc + entry.wordcount;
-      }, 0)
+      }, this.startingWordcount)
+      console.log(wordcount)
+      return wordcount;
     })
-    .catch(console.error)
 }

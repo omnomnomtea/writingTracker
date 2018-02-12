@@ -9,6 +9,7 @@ router.post('/', (req, res, next) => {
     .catch(next);
 })
 
+// res.json sends an array of projects with the wordcounts included
 router.get('/', (req, res, next) => {
   if (!req.user.id) return res.send(403);
   Project.findAll({
@@ -16,15 +17,28 @@ router.get('/', (req, res, next) => {
       userId: req.user.id
     },
   })
-    .then((projects) => {
-      if (projects) return res.json(projects);
-      else res.send(404);
+  // passing along all the promises works now but it's a pain
+  // refactor later with async await perhaps?
+    .then(projects => {
+      if (!projects) return res.send(404);
+      return Promise.all(projects.map(project => {
+        return Promise.all([project, project.getWordcount()]);
+      }));
+    })
+    .then((weirdArrayOfProjects) => {
+      const projects = weirdArrayOfProjects.map(projectArr => {
+        const [project, wordcount] = projectArr;
+        // must be formatted this way (with .dataValues) to send the expected JSON
+        // if you just add wordcount to project, it won't show up
+        return { ...project.dataValues, wordcount }
+      })
+      res.json(projects);
     })
     .catch(next);
 })
 
 router.get('/:id', (req, res, next) => {
-  if (!req.user.id) return res.send(403);
+  if (!req.user || !req.user.id) return res.send(403);
   Project.findOne({
     where: {
       id: Number(req.params.id),
