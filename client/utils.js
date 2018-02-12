@@ -42,11 +42,8 @@ export const groupByDay = (data) => {
 };
 
 export const cleanUpData = (data) => {
-  console.log('data', data)
   const lessRawData = data.map(d => ({ ...d, date: new Date(new Date(d.date).setHours(0, 0, 1)) }));
   lessRawData.sort((a, b) => b.date.valueOf() - a.date.valueOf());
-  console.log('lessRawData',lessRawData)
   const almostCleanData =  groupByDay(lessRawData);
-  console.log('almostCleanData',almostCleanData)
   return fillData(almostCleanData);
 }
