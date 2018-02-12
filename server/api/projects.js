@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const { Project, WordcountEntry } = require('../db/models')
+const Op = require('sequelize').Op;
+
 module.exports = router
 
 router.post('/', (req, res, next) => {
@@ -17,8 +19,8 @@ router.get('/', (req, res, next) => {
       userId: req.user.id
     },
   })
-  // passing along all the promises works now but it's a pain
-  // refactor later with async await perhaps?
+    // passing along all the promises works now but it's a pain
+    // refactor later with async await perhaps?
     .then(projects => {
       if (!projects) return res.send(404);
       return Promise.all(projects.map(project => {
@@ -54,7 +56,7 @@ router.get('/:id', (req, res, next) => {
 })
 
 
-router.get('/:id/entries', (req, res, next) => {
+router.get('/:id/entries/all', (req, res, next) => {
   if (!req.user.id) return res.send(403);
   Project.findOne({
     where: {
@@ -62,6 +64,34 @@ router.get('/:id/entries', (req, res, next) => {
       userId: req.user.id,
     },
     include: [WordcountEntry],
+  })
+    .then((project) => {
+      if (project) return res.json(project.wordcountEntries);
+      else res.send(404);
+    })
+    .catch(next);
+})
+
+
+router.get('/:id/entries', (req, res, next) => {
+  if (!req.user.id) return res.send(403);
+  Project.findOne({
+    where: {
+      id: Number(req.params.id),
+      userId: req.user.id,
+    },
+    include: [
+      {
+        model: WordcountEntry,
+        where: {
+          date: {
+            [Op.gt]: new Date(new Date() - 365 * 24 * 60 * 60 * 1000),
+            [Op.lt]: Date.now(),
+          }
+        }
+      }],
+    order: [[{ model: WordcountEntry}, 'date', 'ASC']]
+
   })
     .then((project) => {
       if (project) return res.json(project.wordcountEntries);
