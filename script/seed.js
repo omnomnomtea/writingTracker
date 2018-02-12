@@ -27,7 +27,11 @@ async function seed () {
     Project.create({name: 'The Great American Novel', startingWordcount: 58900, userId: users[1].id}),
   ])
   const entries = await Promise.all([
-    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2016-12-01"})
+    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2016-12-01"}),
+    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2017-12-09"}),
+    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2017-12-07"}),
+    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2017-12-05"}),
+    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2017-11-01"}),
   ])
 
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
