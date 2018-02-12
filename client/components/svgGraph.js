@@ -27,6 +27,8 @@ const SvgGraph = (props) => {
     '#8E6099',
   ];
 
+  const boxSize = 15;
+
   const generateRect = (dayData, key) => {
     const offsetX = dayData.date.getDay() * (boxSize + 2);
     let colorIndex = 0; // color defaults to white (index 0)
@@ -44,7 +46,6 @@ const SvgGraph = (props) => {
     );
   };
 
-  const boxSize = 20;
   const maxCount = Math.floor(Math.max(...data.map(d => d.wordcount)));
   const today = new Date(new Date().setHours(0, 0, 1));
   const olderDate = data[data.length - 1].date;
