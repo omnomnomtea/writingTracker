@@ -27,7 +27,7 @@ const SvgGraph = (props) => {
     '#8E6099',
   ];
 
-  const generateRect = (dayData) => {
+  const generateRect = (dayData, key) => {
     const offsetX = dayData.date.getDay() * (boxSize + 2);
     let colorIndex = 0; // color defaults to white (index 0)
     if (dayData.wordcount) {
@@ -40,7 +40,7 @@ const SvgGraph = (props) => {
     const color = colors[colorIndex];
     const offsetY = weeksAgo * (boxSize + 2);
     return (
-      <rect className="day" key={dayData.id} width={boxSize} height={boxSize} x={offsetX} y={offsetY} fill={color} data-count={dayData.wordcount} data-date={dayData.date.toDateString()} />
+      <rect className="day" key={dayData.id || "empty-day" + key} width={boxSize} height={boxSize} x={offsetX} y={offsetY} fill={color} data-count={dayData.wordcount} data-date={dayData.date.toDateString()} />
     );
   };
 
@@ -54,18 +54,19 @@ const SvgGraph = (props) => {
 
   return (
     <svg width={12 * (boxSize + 2)} height={(boxSize + 2) * (totalWeeksAgo + 2)}>
-
       {
-        data.slice(0,365).map(day => generateRect(day))
+        data.slice(0, 365).map((day, i) => generateRect(day, i))
       }
-      {
-        // color key
-        colors.map((color, i) => {
-          return <rect key={colors[i]} className="key" width={boxSize} height={boxSize} x={(boxSize + 2.5) * 7} y={(boxSize + 2) * (i + 5) + 10} fill={colors[i]} />
-        })
-      }
+      <g>
+        {
+          // color key
+          colors.map((color, i) => {
+            return <rect key={i + colors[i]} className="key" width={boxSize} height={boxSize} x={(boxSize + 2.5) * 7} y={(boxSize + 2) * (i + 5) + 10} fill={colors[i]} />
+          })
+        }
+      </g>
       <text className="key-label" x={(boxSize + 2.5) * 8} y={(boxSize + 5) * 5 + 10} fill="#000000">Less</text>
-      <text className="key-label" x={(boxSize + 2.5) * 8} y={(boxSize + 28) * 5 + 10} fill="#000000">More</text>
+      <text className="key-label" x={(boxSize + 2.5) * 8} y={(boxSize + 50) * 5 + 10} fill="#000000">More</text>
 
     </svg>
   )
