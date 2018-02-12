@@ -46,6 +46,7 @@ router.get('/:id', (req, res, next) => {
       id: Number(req.params.id),
       userId: req.user.id,
     },
+    include: [WordcountEntry]
   })
     // passing along all the promises works now but it's a pain
     // refactor later with async await perhaps?
