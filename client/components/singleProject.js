@@ -10,7 +10,7 @@ class SingleProject extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="single-project">
         <ul>
           <li>Title: {this.props.project.name}</li>
           <li>Wordcount: {this.props.project.wordcount}</li>
@@ -30,16 +30,6 @@ const mapDispatch = (dispatch, ownProps) => {
 const mapState = (state, ownProps) => {
   const id = Number(ownProps.match.params.id);
   const project = state.projects.filter(project => project.id = id)[0] || {};
-  const startingWordcount = project.id ? project.startingWordcount : 0;
-  let wordcount = startingWordcount;
-  if (project.id) {
-    wordcount = project.wordcountEntries.reduce((acc, entry) => {
-      return acc + entry.wordcount;
-    }, startingWordcount)
-  };
-
-  project.wordcount = wordcount;
-
   return {
     project,
     id,

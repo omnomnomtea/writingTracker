@@ -46,14 +46,22 @@ router.get('/:id', (req, res, next) => {
       id: Number(req.params.id),
       userId: req.user.id,
     },
-    include: [WordcountEntry],
   })
-    .then((project) => {
-      if (project) return res.json(project);
-      else res.send(404);
+    // passing along all the promises works now but it's a pain
+    // refactor later with async await perhaps?
+    .then(project => {
+      if (!project) return res.send(404);
+      return Promise.all([project, project.getWordcount()]);
+    })
+    .then((projectArr) => {
+      const [project, wordcount] = projectArr;
+      // must be formatted this way (with .dataValues) to send the expected JSON
+      // if you just add wordcount to project, it won't show up
+      const returnObj = { ...project.dataValues, wordcount }
+      res.json(returnObj);
     })
     .catch(next);
-})
+});
 
 
 router.get('/:id/entries/all', (req, res, next) => {
@@ -90,7 +98,7 @@ router.get('/:id/entries', (req, res, next) => {
           }
         }
       }],
-    order: [[{ model: WordcountEntry}, 'date', 'ASC']]
+    order: [[{ model: WordcountEntry }, 'date', 'ASC']]
 
   })
     .then((project) => {
