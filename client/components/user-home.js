@@ -1,19 +1,44 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { ProjectList } from './index';
+import { SvgGraph, ProjectList } from './index';
+import { fetchEntries } from '../store'
 
 /**
  * COMPONENT
  */
-const UserHome = (props) => {
-  const { email } = props
+export class UserHome extends React.Component {
+  componentDidMount() {
+    this.props.fetchEntries()
+  }
 
-  return (
-    <div>
-      <ProjectList />
-    </div>
-  )
+  render() {
+    const { entries } = this.props
+
+    if (!entries.length) return <div />
+
+    return (
+      <div>
+        <SvgGraph data={entries} />
+        <ProjectList />
+      </div>
+    )
+  }
 }
 
-export default UserHome
+/**
+ * CONTAINER
+ */
+const mapState = (state) => {
+  return {
+    entries: state.entries
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    fetchEntries: () => dispatch(fetchEntries())
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)

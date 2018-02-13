@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 // Action types
-GET_ENTRIES = 'GET_ENTRIES';
+const GET_ENTRIES = 'GET_ENTRIES';
 
 // Action creaters
-
-getEntries = (entries) => {
+const getEntries = (entries) => {
   return {
     type: GET_ENTRIES,
     entries,
@@ -13,7 +12,6 @@ getEntries = (entries) => {
 }
 
 // Thunks
-
 export const fetchEntries = () =>
   dispatch =>
     axios.get(`/api/entries/all`)
@@ -22,11 +20,11 @@ export const fetchEntries = () =>
       })
       .catch(err => console.log(err))
 
+
 // Default state
-defaultEntries = [];
+const defaultEntries = [];
 
 // Reducer
-
 export default function reducer(prevState = defaultEntries, action) {
   switch (action.type) {
     case GET_ENTRIES:
