@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchProject } from '../store'
-import { SvgGraph } from './index'
+import { SimpleProject, SvgGraph } from './index'
 
 class SingleProject extends React.Component {
   componentDidMount() {
@@ -14,11 +14,7 @@ class SingleProject extends React.Component {
 
     return (
       <div className="single-project">
-        <ul>
-          <li>Title: {this.props.project.name}</li>
-          <li>Wordcount: {this.props.project.wordcount}</li>
-        </ul>
-
+        <SimpleProject project={this.props.project} />
         {
           this.props.project.wordcountEntries &&
           <SvgGraph data={this.props.project.wordcountEntries || []} />
