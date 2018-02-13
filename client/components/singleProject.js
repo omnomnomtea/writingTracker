@@ -10,7 +10,7 @@ class SingleProject extends React.Component {
   }
 
   render() {
-    if(!this.props.project.id) return <div />
+    if (!this.props.project.id) return <div />
 
     return (
       <div className="single-project">
@@ -19,7 +19,10 @@ class SingleProject extends React.Component {
           <li>Wordcount: {this.props.project.wordcount}</li>
         </ul>
 
-        <SvgGraph data={this.props.project.wordcountEntries || []} />
+        {
+          this.props.project.wordcountEntries &&
+          <SvgGraph data={this.props.project.wordcountEntries || []} />
+        }
       </div>
     )
   }

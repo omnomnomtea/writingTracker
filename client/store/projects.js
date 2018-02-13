@@ -34,7 +34,7 @@ export default function reducer(state = defaultState, action) {
     case GET_ALL_PROJECTS:
       return action.projects;
     case GET_PROJECT:
-      return [...state, action.project];
+      return [...state.filter(p => p.id !== action.project.id), action.project];
     default:
       return state;
   }
