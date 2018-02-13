@@ -23,15 +23,20 @@ async function seed () {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
   const projects = await Promise.all([
-    Project.create({name: 'Untitled', userId: users[0].id}),
+    Project.create({name: 'Harry Potter Fanfic', userId: users[0].id}),
     Project.create({name: 'The Great American Novel', startingWordcount: 58900, userId: users[1].id}),
+    Project.create({name: 'The European Swallow', userId: users[0].id}),
   ])
   const entries = await Promise.all([
-    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2016-12-01"}),
-    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2017-12-09"}),
-    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2017-12-07"}),
-    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2017-12-05"}),
-    WordcountEntry.create({wordcount: 100, projectId: 1, date: "2017-11-01"}),
+    WordcountEntry.create({wordcount: 100, projectId: projects[0].id, date: "2016-12-01"}),
+    WordcountEntry.create({wordcount: 100, projectId: projects[0].id, date: "2017-12-09"}),
+    WordcountEntry.create({wordcount: 200, projectId: projects[0].id, date: "2017-12-07"}),
+    WordcountEntry.create({wordcount: 150, projectId: projects[0].id, date: "2017-12-05"}),
+    WordcountEntry.create({wordcount: 122, projectId: projects[0].id, date: "2017-11-01"}),
+    WordcountEntry.create({wordcount: 155, projectId: projects[2].id, date: "2017-12-01"}),
+    WordcountEntry.create({wordcount: 122, projectId: projects[2].id, date: "2017-10-01"}),
+    WordcountEntry.create({wordcount: 122, projectId: projects[2].id, date: "2017-09-01"}),
+
   ])
 
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
