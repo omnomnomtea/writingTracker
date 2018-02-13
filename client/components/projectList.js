@@ -27,9 +27,18 @@ class ProjectList extends React.Component {
   render() {
     return (
       <div className="project-list">
-        {
-          this.props.projects.map(project => <SimpleProject project={project} key={project.id}/>)
-        }
+        <div className="project-list-summary">
+          <h4>Your Projects: ({this.props.totalWordcount} words total)</h4>
+        </div>
+        <ul>
+          {
+            this.props.projects.map(project => (
+              <li key={project.id}>
+                <SimpleProject project={project} key={project.id} />
+              </li>
+            ))
+          }
+        </ul>
       </div>
     )
   }
@@ -45,8 +54,12 @@ const mapDispatch = (dispatch, ownProps) => {
 
 const mapState = (state, ownProps) => {
   const projects = state.projects;
+  const totalWordcount = state.projects.reduce((acc, project) => {
+    return acc + project.wordcount;
+  }, 0)
   return {
     projects,
+    totalWordcount
   }
 }
 
