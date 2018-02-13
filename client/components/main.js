@@ -11,12 +11,13 @@ import {logout} from '../store'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn} = props
+  const {children, handleClick, isLoggedIn, email} = props
 
   return (
     <div>
       <h1>Simple Writing Tracker</h1>
       <nav>
+      <h2>Welcome, {email}!</h2>
         {
           isLoggedIn
             ? <div>
@@ -42,7 +43,8 @@ const Main = (props) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    email: state.user.email,
   }
 }
 
