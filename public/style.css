@@ -36,10 +36,19 @@ nav {
 
 .graph {
   grid-area: graph;
-
 }
 
 .main {
   grid-area: main;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
 
+.single-project {
+  padding: 10px;
+  margin: 5px;
+  background-color: #eeeeee;
+  display: flex;
+  justify-content: space-between;
 }

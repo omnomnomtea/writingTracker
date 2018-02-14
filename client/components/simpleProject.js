@@ -4,11 +4,13 @@ import { withRouter, Link } from 'react-router-dom'
 const SimpleProject = (props) => {
   const { project } = props;
   return (
-    <div className="single-project">
-      <Link to={`/projects/${project.id}`} >{project.name}</Link>
-      <span>Wordcount: {project.wordcount}</span>
-    </div>
+    <Link to={`/projects/${project.id}`} >
+      <div className="single-project">
+      <span className="title">{project.name}</span> <span className="wordcount">{project.wordcount} words</span>
+      </div>
+    </Link>
   )
+
 }
 
 export default SimpleProject

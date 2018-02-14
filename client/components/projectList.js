@@ -26,19 +26,15 @@ class ProjectList extends React.Component {
 
   render() {
     return (
-      <div className="project-list main">
-        <div className="project-list-summary">
-          <h4>Your Projects: ({this.props.totalWordcount} words total)</h4>
-        </div>
-        <ul>
+      <div className="main">
+        <h4>Your Projects: ({this.props.totalWordcount} words total)</h4>
+        <div className="project-list">
           {
             this.props.projects.map(project => (
-              <li key={project.id}>
-                <SimpleProject project={project} key={project.id} />
-              </li>
+              <SimpleProject project={project} key={project.id} />
             ))
           }
-        </ul>
+        </div>
       </div>
     )
   }
