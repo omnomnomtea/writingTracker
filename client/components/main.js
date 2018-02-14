@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import {logout} from '../store'
+import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
+import { logout } from '../store'
 
 /**
  * COMPONENT
@@ -11,13 +11,13 @@ import {logout} from '../store'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, email} = props
+  const { children, handleClick, isLoggedIn, email } = props
 
   return (
-    <div>
-      <h1>Simple Writing Tracker</h1>
+    <React.Fragment>
       <nav>
-      <h2>Welcome, {email}!</h2>
+        <h1>Simple Writing Tracker</h1>
+        <h2>Welcome, {email}!</h2>
         {
           isLoggedIn
             ? <div>
@@ -34,7 +34,7 @@ const Main = (props) => {
       </nav>
       <hr />
       {children}
-    </div>
+    </React.Fragment>
   )
 }
 
@@ -50,7 +50,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick () {
+    handleClick() {
       dispatch(logout())
     }
   }

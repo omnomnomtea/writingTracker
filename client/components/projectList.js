@@ -26,7 +26,7 @@ class ProjectList extends React.Component {
 
   render() {
     return (
-      <div className="project-list">
+      <div className="project-list main">
         <div className="project-list-summary">
           <h4>Your Projects: ({this.props.totalWordcount} words total)</h4>
         </div>

@@ -18,10 +18,10 @@ export class UserHome extends React.Component {
     if (!entries.length) return <div />
 
     return (
-      <div>
+      <React.Fragment>
         <SvgGraph data={entries} />
         <ProjectList />
-      </div>
+      </React.Fragment>
     )
   }
 }

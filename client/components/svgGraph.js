@@ -60,6 +60,7 @@ const SvgGraph = (props) => {
   const totalWeeksAgo = Math.ceil((endOfWeek.valueOf() - olderDate.valueOf()) / 7 / msPerDay) - 1;
 
   return (
+    <div className="graph">
     <svg width={12 * (boxSize + 2)} height={(boxSize + 2) * (totalWeeksAgo + 2)}>
       {
         data.slice(0, 365).map((day, i) => generateRect(day, i))
@@ -76,6 +77,7 @@ const SvgGraph = (props) => {
       <text className="key-label" x={(boxSize + 2.5) * 8} y={(boxSize + 50) * 5 + 10} fill="#000000">More</text>
 
     </svg>
+    </div>
   )
 
 

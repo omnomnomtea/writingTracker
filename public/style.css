@@ -15,7 +15,31 @@ nav a {
   margin: 1em;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
+
+
+#app {
+  display: grid;
+  margin: 15px;
+  width: 100%;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header"
+    "graph main"
+    "footer footer";
+}
+
+
+nav {
+  grid-area: header;
+}
+
+.graph {
+  grid-area: graph;
+
+}
+
+.main {
+  grid-area: main;
+
 }
