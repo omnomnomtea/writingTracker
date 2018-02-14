@@ -13,13 +13,18 @@ class SingleProject extends React.Component {
     if (!this.props.project.id) return <div />
 
     return (
-      <div className="single-project">
+      <React.Fragment>
+      <div className="main">
         <SimpleProject project={this.props.project} />
+        </div>
         {
           this.props.project.wordcountEntries &&
           <SvgGraph data={this.props.project.wordcountEntries || []} />
         }
-      </div>
+
+
+
+      </React.Fragment>
     )
   }
 
