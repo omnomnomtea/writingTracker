@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchProject } from '../store'
-import { SimpleProject, SvgGraph } from './index'
+import { SimpleProject, SvgGraph, SingleEntry } from './index'
 
 class SingleProject extends React.Component {
   componentDidMount() {
@@ -16,6 +16,14 @@ class SingleProject extends React.Component {
       <React.Fragment>
       <div className="main">
         <SimpleProject project={this.props.project} />
+
+        {
+          this.props.project.wordcountEntries && this.props.project.wordcountEntries.map((entry, i) => {
+            // every other row should have a truthy "even" or "odd" prop
+            return <SingleEntry key={entry.id} entry={entry} even={i%2}/>
+          })
+        }
+
         </div>
         {
           this.props.project.wordcountEntries &&
