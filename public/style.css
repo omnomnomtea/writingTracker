@@ -52,3 +52,14 @@ nav {
   display: flex;
   justify-content: space-between;
 }
+
+.single-entry {
+  padding: 0px 10px;
+  margin: 0px 5px;
+}
+
+
+.even {
+  background-color: #eeeeee;
+}
+
