@@ -61,7 +61,7 @@ const SvgGraph = (props) => {
 
   return (
     <div className="graph">
-    <svg width={12 * (boxSize + 2)} height={(boxSize + 2) * (totalWeeksAgo + 2)}>
+    <svg width={12 * (boxSize + 2)} height={(boxSize + 5) * (totalWeeksAgo + 2)}>
       {
         data.slice(0, 365).map((day, i) => generateRect(day, i))
       }
