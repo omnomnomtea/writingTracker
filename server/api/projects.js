@@ -46,7 +46,10 @@ router.get('/:id', (req, res, next) => {
       id: Number(req.params.id),
       userId: req.user.id,
     },
-    include: [WordcountEntry]
+    include: [{
+      model: WordcountEntry,
+    }],
+    order: [[WordcountEntry, 'date', 'DESC']]
   })
     // passing along all the promises works now but it's a pain
     // refactor later with async await perhaps?
@@ -72,7 +75,7 @@ router.get('/:id/entries/all', (req, res, next) => {
       id: Number(req.params.id),
       userId: req.user.id,
     },
-    include: [WordcountEntry],
+    include: [{ model: WordcountEntry, order: [['date']] }],
   })
     .then((project) => {
       if (project) return res.json(project.wordcountEntries);
