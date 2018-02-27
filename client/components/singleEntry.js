@@ -2,10 +2,9 @@ import React from 'react'
 
 const SingleEntry = (props) => {
   const entry = props.entry;
-  const odd = props.odd || !props.even;
-  const even = props.even || !props.odd;
+  const even = props.even;
 
-  const evenOrOdd = props.odd? "odd" : "even"
+  const evenOrOdd = props.even? "even" : "odd"
   return (
       <div className={'single-entry ' + evenOrOdd}>
         <span className="date"> {new Date(entry.date).toDateString()} </span>
