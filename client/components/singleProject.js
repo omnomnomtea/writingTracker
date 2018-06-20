@@ -11,7 +11,7 @@ class SingleProject extends React.Component {
 
   render() {
     if (!this.props.project.id) return <div />
-
+    if (!this.props.project.wordcountEntries || !this.props.project.wordcountEntries.length) return <div />
     return (
       <React.Fragment>
       <div className="main">
