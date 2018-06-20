@@ -8,12 +8,19 @@ const msPerDay = 1000 * 60 * 60 * 24;
 
 
 const SvgGraph = (props) => {
+
+
   // the number of days to render (defaults to 1 year)
   const numberDays = props.days || 365;
 
   const data = cleanUpData(props.data.filter(datum => {
     return !((new Date() - new Date(datum.date) > msPerDay * numberDays));
   }));
+
+
+  if (!data.length) return <div />
+
+  console.log("DATA", data)
 
   const colors = [
     '#eeeeee',
@@ -54,7 +61,7 @@ const SvgGraph = (props) => {
 
   const maxCount = Math.floor(Math.max(...data.map(d => d.wordcount)));
   const today = new Date(new Date().setHours(0, 0, 1));
-  const olderDate = data[data.length - 1].date;
+  const olderDate = new Date(data[data.length - 1])//.date;
 
   const endOfWeek = new Date((6 - today.getDay()) * msPerDay + today.valueOf());
   const totalWeeksAgo = Math.ceil((endOfWeek.valueOf() - olderDate.valueOf()) / 7 / msPerDay) - 1;
