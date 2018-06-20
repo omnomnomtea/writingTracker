@@ -8,8 +8,6 @@ const msPerDay = 1000 * 60 * 60 * 24;
 
 
 const SvgGraph = (props) => {
-
-
   // the number of days to render (defaults to 1 year)
   const numberDays = props.days || 365;
 
@@ -17,11 +15,8 @@ const SvgGraph = (props) => {
     return !((new Date() - new Date(datum.date) > msPerDay * numberDays));
   }));
 
-
   if (!data.length) return <div />
-
-  console.log("DATA", data)
-
+  
   const colors = [
     '#eeeeee',
     '#F7F1F1',
