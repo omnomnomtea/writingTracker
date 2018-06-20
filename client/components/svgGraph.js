@@ -1,7 +1,4 @@
 import React from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { fetchProject } from '../store'
 import { cleanUpData } from '../utils'
 
 const msPerDay = 1000 * 60 * 60 * 24;
@@ -59,11 +56,14 @@ const SvgGraph = (props) => {
   const olderDate = new Date(data[data.length - 1])//.date;
 
   const endOfWeek = new Date((6 - today.getDay()) * msPerDay + today.valueOf());
-  const totalWeeksAgo = Math.ceil((endOfWeek.valueOf() - olderDate.valueOf()) / 7 / msPerDay) - 1;
+  let totalWeeksAgo = Math.ceil((endOfWeek.valueOf() - olderDate.valueOf()) / 7 / msPerDay) - 1;
+
+  const svgWidth = 12 * (boxSize + 2);
+  const svgHeight = (boxSize + 5) * (totalWeeksAgo + 2) || 350; //in case of NaN for totalweeks ago (if there are few datapoints)
 
   return (
     <div className="graph">
-    <svg width={12 * (boxSize + 2)} height={(boxSize + 5) * (totalWeeksAgo + 2)}>
+    <svg width={svgWidth} height={svgHeight}>
       {
         data.slice(0, 365).map((day, i) => generateRect(day, i))
       }
