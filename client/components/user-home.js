@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { SvgGraph, ProjectList } from './index';
 import { fetchEntries } from '../store'
@@ -14,12 +13,9 @@ export class UserHome extends React.Component {
 
   render() {
     const { entries } = this.props
-
-    if (!entries.length) return <div />
-
     return (
       <React.Fragment>
-        <SvgGraph data={entries} />
+        {!!entries.length && <SvgGraph data={entries} />}
         <ProjectList />
       </React.Fragment>
     )
